@@ -1,0 +1,15 @@
+{
+  "name": "bobs-bagels-pair-programming-ethan-gwen",
+  "version": "1.0.0",
+  "description": "First Attempt",
+  "type": "module",
+  "main": "bobsBagels.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gwen and Ethan",
+  "license": "ISC",
+  "dependencies": {
+    "package": "^1.0.1"
+  }
+}
