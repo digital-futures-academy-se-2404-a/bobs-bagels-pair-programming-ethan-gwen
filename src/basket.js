@@ -6,6 +6,11 @@ const basket = {
         }
         this.items.push(item);
     },
+    removeItem(item) {
+        let index = this.items.indexOf(item);
+        this.items.splice(index, 1);
+
+    },
     items: [],
 }
 
