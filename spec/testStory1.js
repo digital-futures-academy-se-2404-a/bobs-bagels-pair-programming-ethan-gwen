@@ -1,12 +1,13 @@
 import { assertEquals } from "./testFramework/testFramework.js";
-import basket from "../src/basket.js";
-//import item from "../src/item.js";
+import Basket from "../src/basket.js";
+import Item from "../src/item.js";
 
 const reset = () =>  {
     expected = undefined;
     actual = undefined;
     result = undefined;
-    basket.items = [];
+    testBasket = null;
+    testBagel = null;
 }
 
 
@@ -18,13 +19,15 @@ console.log("Add item to basket, and have items array length increase")
 console.log("=================");
 
 //Arrange
-let expected = basket.items.length + 1;
 let actual, result;
-let testBagel = {};
+let testBagel = new Item("Bagel");
+let testBasket = new Basket();
+let expected = testBasket.getItems().length + 1;
 
 //Act
-basket.addItem(testBagel);
-actual = basket.items.length;
+testBasket.addItem(testBagel);
+actual = testBasket.getItems().length;
+
 //Assert
 result = assertEquals(actual, expected);
 
@@ -47,11 +50,12 @@ console.log("=================");
 
 //Arrange
 expected = true;
-testBagel = {};
+testBagel = new Item("Bagel");
+testBasket = new Basket();
 
 //Act
-basket.addItem(testBagel);
-actual = basket.items.includes(testBagel);
+testBasket.addItem(testBagel);
+actual = testBasket.getItems().includes(testBagel);
 //Assert
 result = assertEquals(actual, expected);
 
@@ -74,13 +78,15 @@ console.log("=================");
 
 //Arrange
 expected = true;
-testBagel = {};
-let testBagel2 = {};
+testBagel = new Item("Plain Bagel");
+let testBagel2 = new Item("Seeded Bagel");
+testBasket = new Basket();
+
 
 //Act
-basket.addItem(testBagel);
-basket.addItem(testBagel2);
-actual = basket.items.includes(testBagel) && basket.items.includes(testBagel2);
+testBasket.addItem(testBagel);
+testBasket.addItem(testBagel2);
+actual = testBasket.getItems().includes(testBagel) && testBasket.getItems().includes(testBagel2);
 //Assert
 result = assertEquals(actual, expected);
 
@@ -103,11 +109,12 @@ console.log("=================");
 
 //Arrange
 expected = false;
-testBagel = null;
+testBagel = new Item(null);
+testBasket = new Basket();
 
 //Act
-basket.addItem(testBagel);
-actual = basket.items.includes(testBagel);
+testBasket.addItem(testBagel);
+actual = testBasket.getItems().includes(testBagel);
 
 //Assert
 result = assertEquals(actual, expected);

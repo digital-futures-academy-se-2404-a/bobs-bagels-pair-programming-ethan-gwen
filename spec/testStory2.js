@@ -1,11 +1,13 @@
 import { assertEquals } from "./testFramework/testFramework.js";
-import basket from "../src/basket.js";
+import Basket from "../src/basket.js";
+import Item from "../src/item.js";
 
 const reset = () =>  {
     expected = undefined;
     actual = undefined;
     result = undefined;
-    basket.items = [];
+    testBasket = null;
+    testBagel = null;
 }
 
 
@@ -17,14 +19,17 @@ console.log("Check if the array length decreases")
 console.log("=================");
 
 //Arrange
-let expected = basket.items.length;
+
 let actual, result;
-let testBagel = {};
+let testBagel = new Item("Bagel");
+let testBasket = new Basket();
+let expected = testBasket.getItems().length;
 
 //Act
-basket.addItem(testBagel);
-basket.removeItem(testBagel);
-actual = basket.items.length;
+testBasket.addItem(testBagel);
+testBasket.removeItem(testBagel);
+actual = testBasket.getItems().length;
+
 //Assert
 result = assertEquals(actual, expected);
 
@@ -47,12 +52,13 @@ console.log("=================");
 
 //Arrange
 expected = false;
-testBagel = {"bagel": 1};
+testBagel = new Item("Bagel");
+testBasket = new Basket();
 
 //Act
-basket.addItem(testBagel);
-basket.removeItem();
-actual = basket.items.includes(testBagel);
+testBasket.addItem(testBagel);
+testBasket.removeItem();
+actual = testBasket.getItems().includes(testBagel);
 //Assert
 result = assertEquals(actual, expected);
 
@@ -75,14 +81,15 @@ console.log("=================");
 
 //Arrange
 expected = true;
-testBagel = {"bagel": 1};
-let testBagel2 = {"bagel": 2};
+testBagel = new Item("Plain Bagel");
+let testBagel2 = new Item("Seeded Bagel");
+testBasket = new Basket();
 
 //Act
-basket.addItem(testBagel);
-basket.addItem(testBagel2);
-basket.removeItem(testBagel2);
-actual = basket.items.includes(testBagel) && !basket.items.includes(testBagel2);
+testBasket.addItem(testBagel);
+testBasket.addItem(testBagel2);
+testBasket.removeItem(testBagel2);
+actual = testBasket.getItems().includes(testBagel) && !testBasket.getItems().includes(testBagel2);
 //Assert
 result = assertEquals(actual, expected);
 
